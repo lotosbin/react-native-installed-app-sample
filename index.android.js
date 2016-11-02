@@ -11,11 +11,45 @@ import {
   Text,
   View
 } from 'react-native';
+import InstalledApp from 'react-native-installed-app';
 
 export default class sample extends Component {
-  render() {
+    constructor(props) {
+        super(props);
+        this.state = {
+            installed: false,
+            installedapp: false,
+        }
+    }
+
+    componentDidMount() {
+        InstalledApp.isApplicationInstalled('fb://')
+            .then(bs => {
+                console.log(`fb:${bs}`)
+                this.setState({
+                    installed: bs
+                })
+            })
+            .done()
+        InstalledApp.isApplicationInstalled('com.sample')
+            .then(bs => {
+                console.log(`installedapp:${bs}`)
+                this.setState({
+                    installedapp: bs
+                })
+            })
+            .done()
+    }
+
+    render() {
     return (
       <View style={styles.container}>
+        <Text style={styles.welcome}>
+          fa:// {this.state.installed?'true':'false'}
+        </Text>
+        <Text style={styles.welcome}>
+          installedapp:// {this.state.installedapp?'true':'false'}
+        </Text>
         <Text style={styles.welcome}>
           Welcome to React Native!
         </Text>
