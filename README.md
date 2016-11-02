@@ -9,7 +9,8 @@
 ```
 npm install -S https://github.com/lotosbin/react-native-installed-app.git
 ```
-```ecmascript 6
+
+```
 import InstalledApp from 'react-native-installed-app';
 var name = '';
 if(Platform.OS === 'ios'){
